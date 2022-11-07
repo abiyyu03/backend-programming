@@ -38,4 +38,12 @@ Route::get('/students', [StudentController::class, 'index']);
 
 # menambahkan resource student
 # method post
+Route::get('/students', [StudentController::class, 'index']);
+
 Route::post('/students', [StudentController::class, 'store']);
+
+Route::get('/students/{id}', [StudentController::class, 'view']);
+
+Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+
+Route::put('/students/{id}', [StudentController::class, 'update']);

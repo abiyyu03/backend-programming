@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,9 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 # method get
 Route::get('/animals', [AnimalController::class, 'index']);
@@ -32,18 +33,24 @@ Route::put('/animals/{id}', [AnimalController::class, 'update']);
 # method delete
 Route::delete('/animals/{id}', [AnimalController::class, 'destroy']);
 
+
 # get all resource students
 # method get
-Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students', [StudentController::class, 'index'])->middleware('auth:sanctum');
 
 # menambahkan resource student
 # method post
-Route::get('/students', [StudentController::class, 'index']);
+Route::get('/students', [StudentController::class, 'index'])->middleware('auth:sanctum');
 
-Route::post('/students', [StudentController::class, 'store']);
+Route::post('/students', [StudentController::class, 'store'])->middleware('auth:sanctum');
 
-Route::get('/students/{id}', [StudentController::class, 'view']);
+Route::get('/students/{id}', [StudentController::class, 'view'])->middleware('auth:sanctum');
 
-Route::delete('/students/{id}', [StudentController::class, 'destroy']);
+Route::delete('/students/{id}', [StudentController::class, 'destroy'])->middleware('auth:sanctum');
 
-Route::put('/students/{id}', [StudentController::class, 'update']);
+Route::put('/students/{id}', [StudentController::class, 'update'])->middleware('auth:sanctum');
+
+# Auth
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/register', [AuthController::class, 'register']);

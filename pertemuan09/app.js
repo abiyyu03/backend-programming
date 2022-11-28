@@ -1,4 +1,3 @@
-const { index, store, update,destroy } = require('./Controllers/FruitController.js');
 /**
  * TODO 9:
  * - Import semua method FruitController
@@ -6,8 +5,7 @@ const { index, store, update,destroy } = require('./Controllers/FruitController.
  *
  * @hint - Gunakan Destructing Object
  */
-
- let importHere = "";
+const { index, store, update,destroy } = require('./Controllers/FruitController.js');
 
  /**
   * NOTES:

@@ -1,10 +1,9 @@
-const fruits = require('../data/fruits.js');
 /**
  * TODO 3:
  * - import fruits dari data/fruits.js
  * - refactor variabel ke ES6 variable
  */
-//  let fruits = fruits;
+const fruits = require('../data/fruits.js');
 
  /**
   * TODO 4:

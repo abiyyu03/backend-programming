@@ -1,5 +1,6 @@
 // import Model Student
 const Student = require("../models/Students");
+const { body, validationResult } = require('express-validator');
 
 class StudentController {
   // menambahkan keyword async
@@ -7,31 +8,44 @@ class StudentController {
     // memanggil method static all dengan async await.
     const students = await Student.all();
 
-    const data = {
-      message: "Menampilkkan semua students",
-      data: students,
-    };
-
-    res.json(data);
+    if(students){
+      const data = {
+        message: "Menampilkkan semua students",
+        data: students,
+      };
+    } else {
+      const data = {
+        message: "students kosong",
+        data: students,
+      };
+    }
+    res.status(200).json(data);
   }
 
   async store(req, res) {
     const { nama,nim,email,jurusan } = req.body;
     
-    const student = { nama,nim,email,jurusan };
-    /**
-     * TODO 2: memanggil method create.
-     * Method create mengembalikan data yang baru diinsert.
-     * Mengembalikan response dalam bentuk json.
-     */
-    const students = await Student.create(student);
-
-    const data = {
-      message: "Menambahkan data student",
-      data: student,
+    const student = { 
+      nama,
+      nim,
+      email,
+      jurusan 
+    }; 
+    // res.json(req.body.nama);
+    if(student.nama == '' || student.nim == '' || student.email == '' || student.jurusan == ''){
+      return res.status(400).json({
+        errors:"Cek kembali datanya, jangan sampai ada yang kosong"
+      });
+    } else {
+      const students = await Student.create(student);
+      const data = {
+        message: "Menambahkan data student",
+        data: student,
     };
-
-    res.json(data);
+  
+      res.json(data);
+    }
+    
   }
 
   async update(req, res) {
